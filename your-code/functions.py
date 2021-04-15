@@ -1,5 +1,13 @@
 from datetime import datetime
 
+def responsedf():
+    '''Creates a dataframe out of the responses in the API call to yahoo.'''
+    diccionario = {}
+    for k, v in response.items():
+        diccionario = {}
+        diccionario[k] = v
+
+
 #definimos una funcion que convierte un valor timestamp a un valor datetime usando un apply
 #la funcion necesita tener datetime importado
 def ts_to_dt(df, column, new_column):
@@ -32,12 +40,22 @@ def percent_change(df):
 #this alows us to bettter compare across a big range of prices
 # this is the function for stocks:
 def base_price(df):
+      """
+    creates a column that divides the closing price of as stock for each day by the closing 
+    price at the start of the analyzed time period.
+    df = dataframe for a stock with that contains a close column.
+    """
     for v in range(0, len(df)):
         df.loc[v, 'price_index'] = df.loc[v, 'close'] / df.loc[0, 'close']
     return df
 
 #We create the same function with different columns to iterate over our crypto data
 def crypto_index(df):
+    """
+    creates a column that divides the closing price of each day by the closing 
+    price at the start of the analyzed time period.
+    df = dataframe for a stock with that contains a Close column.
+    """
     for v in range(0, len(df)):
         df.loc[v, 'price_index'] = df.loc[v, 'Close'] / df.loc[0, 'Close']
     return df
